@@ -37,12 +37,16 @@ class Preview extends React.PureComponent<IPreviewProps> {
 
     if (status === 'error_file_size' || status === 'error_validation') {
       return (
-        <div className={className} style={style}>
+        <>
+        <div className={className} style={style}>         
+          {canRemove && <span className="dzu-previewButton" style={iconByFn.remove} onClick={remove} />}
+        </div>          
+        <div>
           <span className="dzu-previewFileNameError">{title}</span>
           {status === 'error_file_size' && <span>{size < minSizeBytes ? 'File too small' : 'File too big'}</span>}
           {status === 'error_validation' && <span>{String(validationError)}</span>}
-          {canRemove && <span className="dzu-previewButton" style={iconByFn.remove} onClick={remove} />}
-        </div>
+         </div>
+         </>
       )
     }
 
